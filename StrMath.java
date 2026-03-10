@@ -179,7 +179,8 @@ class StrMath {
 
     /**
      * Multiplies two digits together
-     * @param firstInput First number
+     * 
+     * @param firstInput  First number
      * @param secondInput Second number
      * @return A string of the answer
      */
@@ -193,7 +194,8 @@ class StrMath {
 
         // Use a nested loop to multiply every number by every number
         for (int i = formattedFirstInput.size() - 1; i >= 0; i--) {
-            // Create an arraylist to store the carry bit and define the size of it to the number that is bigger between the inputs
+            // Create an arraylist to store the carry bit and define the size of it to the
+            // number that is bigger between the inputs
             ArrayList<String> carryBitList = new ArrayList<String>(Collections
                     .nCopies(formattedFirstInput.size() > formattedSecondInput.size() ? formattedFirstInput.size()
                             : formattedSecondInput.size(), "0"));
@@ -210,13 +212,15 @@ class StrMath {
                 // Append the first digit to the left index of the carry bit
                 if (j == 0 && !carryAnswer[0].equals("0")) {
                     carryBitList.add(0, carryAnswer[0]);
-                } else if (!carryAnswer[0].equals("0")){
+                } else if (!carryAnswer[0].equals("0")) {
                     carryBitList.set(j - 1, carryAnswer[0]);
                 }
             }
 
             // Check for any left carry bits
-            if (carryBitList.size() > (formattedFirstInput.size() > formattedSecondInput.size() ? formattedFirstInput.size() : formattedSecondInput.size())) {
+            if (carryBitList
+                    .size() > (formattedFirstInput.size() > formattedSecondInput.size() ? formattedFirstInput.size()
+                            : formattedSecondInput.size())) {
                 iterationAnswer = carryBitList.get(0) + iterationAnswer;
             }
 
@@ -225,7 +229,7 @@ class StrMath {
         }
 
         // Add 0s accordingly to each iteration answer
-        for (int i = 0; i < answer.size(); i++){
+        for (int i = 0; i < answer.size(); i++) {
             String newAnswer = answer.get(i) + String.valueOf("0").repeat(i);
             answer.set(i, newAnswer);
         }
@@ -238,8 +242,22 @@ class StrMath {
 
         return finalAnswer;
     }
-
-    public String StrFacr(String input) {
-        return "";
+    /**
+     * Calculates the factorial of a given number.
+     * @param input The value.
+     * @return A string of the answer.
+     */
+    public String StrFact(String input) {
+        if (input.equals("0") || input.equals("1")) {
+            return "1";
+        } else {
+            String counter = "1";
+            String answer = "1";
+            while (!counter.equals(input)) {
+                answer = StrMult(StrAdd(counter, "1"), answer);
+                counter = StrAdd(counter, "1");
+            }
+            return answer;
+        }
     }
 }
