@@ -126,6 +126,11 @@ class StrMath {
         ArrayList<String> formattedFirstInput = new ArrayList<>(Arrays.asList(firstInput.split("")));
         ArrayList<String> formattedSecondInput = new ArrayList<>(Arrays.asList(secondInput.split("")));
 
+        // If inputs are single digits then use the single digit function
+        // if (formattedFirstInput.size() == 1 && formattedSecondInput.size() == 1){
+        //     return StrAddDigit(firstInput, secondInput);
+        // }
+
         // If they're not the same length then pad with zeros
         while (formattedFirstInput.size() != formattedSecondInput.size()) {
             if (formattedFirstInput.size() > formattedSecondInput.size()) {
@@ -143,6 +148,11 @@ class StrMath {
         for (int i = formattedFirstInput.size() - 1; i >= 0; i--) {
             // Add the two digits
             String[] digitAnswer = StrAddDigit(formattedFirstInput.get(i), formattedSecondInput.get(i)).split("");
+
+            // Add the right character to this column's carry bit and store it as a final
+            // answer
+            String[] carryAnswer = StrAddDigit(digitAnswer[1], carryBitList.get(i)).split("");
+
             // Add the left character to the left column's carry bit if it's one
             if (digitAnswer[0].equals("1")) {
                 // If not at zero then insert it at the start
@@ -152,10 +162,6 @@ class StrMath {
                     carryBitList.add(0, digitAnswer[0]);
                 }
             }
-
-            // Add the right character to this column's carry bit and store it as a final
-            // answer
-            String[] carryAnswer = StrAddDigit(digitAnswer[1], carryBitList.get(i)).split("");
 
             // Add the left character to the left column's carry bit if it's one
             if (carryAnswer[0].equals("1")) {
@@ -254,8 +260,10 @@ class StrMath {
             String counter = "1";
             String answer = "1";
             while (!counter.equals(input)) {
-                answer = StrMult(StrAdd(counter, "1"), answer);
-                counter = StrAdd(counter, "1");
+                String nextCounter = StrAdd(counter, "1");
+                answer = StrMult(nextCounter, answer);
+                counter = nextCounter;
+                //System.out.println(counter);
             }
             return answer;
         }
