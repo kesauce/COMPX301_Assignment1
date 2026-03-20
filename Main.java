@@ -5,6 +5,6 @@ public class Main {
         // System.out.println(strMath.StrMultDigit("7", "7"));
         System.out.println(strMath.StrAdd("9", "1"));
         //System.out.println(strMath.StrMult("99", "9999"));
-        System.out.println(strMath.StrFact("20"));
+        System.out.println(strMath.StrFact("1000"));
     }
 }

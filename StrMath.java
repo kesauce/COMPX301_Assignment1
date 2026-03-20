@@ -67,7 +67,7 @@ class StrMath {
      * @param secondInput Second digit
      * @return An string of the answer
      */
-    public String StrAddDigit(String firstInput, String secondInput) {
+    private String StrAddDigit(String firstInput, String secondInput) {
         // Strip the inputs
         String[] firstInputArray = firstInput.split("");
         String[] secondInputArray = secondInput.split("");
@@ -94,7 +94,7 @@ class StrMath {
      * @param secondInput Second digit
      * @return A string of the answer
      */
-    public String StrMultDigit(String firstInput, String secondInput) {
+    private String StrMultDigit(String firstInput, String secondInput) {
         // Strip the inputs
         String[] firstInputArray = firstInput.split("");
         String[] secondInputArray = secondInput.split("");
@@ -116,6 +116,20 @@ class StrMath {
     }
 
     /**
+     * Checks if the given input is a string of digits
+     * @param input String
+     * @return If the given input is a string of digits
+     */
+    private Boolean isDigit(String input){
+        for (int i = 0; i < input.length(); i++){
+            if (!DIGITS.contains(String.valueOf(input.charAt(i)))){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * Adds any positive number
      * 
      * @param firstInput  First number
@@ -123,13 +137,13 @@ class StrMath {
      * @return A string of the answer
      */
     public String StrAdd(String firstInput, String secondInput) {
+        // Check first if they are strings
+        if (!isDigit(firstInput) || !isDigit(secondInput)){
+            return "Error: inputs are not digits as strings";
+        }
+
         ArrayList<String> formattedFirstInput = new ArrayList<>(Arrays.asList(firstInput.split("")));
         ArrayList<String> formattedSecondInput = new ArrayList<>(Arrays.asList(secondInput.split("")));
-
-        // If inputs are single digits then use the single digit function
-        // if (formattedFirstInput.size() == 1 && formattedSecondInput.size() == 1){
-        //     return StrAddDigit(firstInput, secondInput);
-        // }
 
         // If they're not the same length then pad with zeros
         while (formattedFirstInput.size() != formattedSecondInput.size()) {
@@ -191,6 +205,11 @@ class StrMath {
      * @return A string of the answer
      */
     public String StrMult(String firstInput, String secondInput) {
+         // Check first if they are strings
+        if (!isDigit(firstInput) || !isDigit(secondInput)){
+            return "Error: inputs are not digits as strings";
+        }
+
         // Format the inputs
         ArrayList<String> formattedFirstInput = new ArrayList<>(Arrays.asList(firstInput.split("")));
         ArrayList<String> formattedSecondInput = new ArrayList<>(Arrays.asList(secondInput.split("")));
@@ -254,16 +273,22 @@ class StrMath {
      * @return A string of the answer.
      */
     public String StrFact(String input) {
+         // Check first if they are strings
+        if (!isDigit(input)){
+            return "Error: input is not digits as strings";
+        }
+
         if (input.equals("0") || input.equals("1")) {
             return "1";
         } else {
             String counter = "1";
             String answer = "1";
+            // Keep multiplying all the numbers from 1 until the input
             while (!counter.equals(input)) {
                 String nextCounter = StrAdd(counter, "1");
+                // Add the next number and the current answer
                 answer = StrMult(nextCounter, answer);
                 counter = nextCounter;
-                //System.out.println(counter);
             }
             return answer;
         }
