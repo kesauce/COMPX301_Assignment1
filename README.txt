@@ -1,3 +1,6 @@
+Alexis Manosca
+Student ID: 1644633
+
 Create an instance of the class and print out the result of calling each method. Each method returns a string so it should easily be printable.
 
 For example:
