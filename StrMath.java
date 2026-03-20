@@ -210,6 +210,17 @@ class StrMath {
             return "Error: inputs are not digits as strings";
         }
 
+        // Return base cases
+        if (firstInput.equals("0") || secondInput.equals("0")){
+            return "0";
+        }
+        else if (firstInput.equals("1")){
+            return secondInput;
+        }
+        else if (secondInput.equals("1")){
+            return firstInput;
+        }
+
         // Format the inputs
         ArrayList<String> formattedFirstInput = new ArrayList<>(Arrays.asList(firstInput.split("")));
         ArrayList<String> formattedSecondInput = new ArrayList<>(Arrays.asList(secondInput.split("")));
